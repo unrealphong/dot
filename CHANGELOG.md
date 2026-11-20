@@ -147,8 +147,8 @@ Cách ghi một dòng mới: mục Commit và PR trong [AGENTS.md](AGENTS.md).
 
 - Tên người dùng git. [c1b9557]
 
-[#3]: https://github.com/unrealphong/dot/pull/3
 [#4]: https://github.com/unrealphong/dot/pull/4
+[#3]: https://github.com/unrealphong/dot/pull/3
 [tvb#34]: https://github.com/phonglh-tvb/dot/pull/34
 [tvb#33]: https://github.com/phonglh-tvb/dot/pull/33
 [tvb#32]: https://github.com/phonglh-tvb/dot/pull/32
