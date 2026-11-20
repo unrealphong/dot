@@ -1,6 +1,6 @@
 # Hướng dẫn cho AI agent
 
-Repo dotfiles cá nhân, **public** trên GitHub (`unrealphong/dot`; tới 2026-11-20 nằm ở `phonglh-tvb/dot`, cùng lịch sử commit, PR cũ vẫn ở đó), nhánh chính `master`. Đọc [README.md](README.md) trước để biết bố cục; file này nói *cách làm việc* ở đây. Người dùng nói tiếng Việt: trả lời và viết tài liệu bằng tiếng Việt, commit bằng tiếng Anh (xem mục Commit và PR).
+Repo dotfiles cá nhân, **public** trên GitHub (`unrealphong/dot`; tới 2026-11-20 nằm ở `phonglh-tvb/dot`, PR cũ vẫn ở đó; khi chuyển, lịch sử được viết lại với tác giả unrealphong nên SHA khác repo cũ), nhánh chính `master`. Đọc [README.md](README.md) trước để biết bố cục; file này nói *cách làm việc* ở đây. Người dùng nói tiếng Việt: trả lời và viết tài liệu bằng tiếng Việt, commit bằng tiếng Anh (xem mục Commit và PR).
 
 ## Quy tắc không được phá
 

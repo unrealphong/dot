@@ -1,6 +1,6 @@
 # Changelog
 
-Những thay đổi đáng kể của repo, mới nhất ở trên. Repo không đánh số phiên bản nên nhóm theo ngày merge; trong mỗi ngày chia **Thêm / Đổi / Sửa / Bỏ** theo tinh thần [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). `#số` là PR của repo này; `tvb#số` là PR ở repo cũ [phonglh-tvb/dot](https://github.com/phonglh-tvb/dot), nơi repo nằm tới 2026-11-20 (cùng lịch sử commit); mã 7 ký tự là commit từ trước khi repo dùng PR. Thiết kế của các việc lớn ở [docs/specs/](docs/specs/README.md).
+Những thay đổi đáng kể của repo, mới nhất ở trên. Repo không đánh số phiên bản nên nhóm theo ngày merge; trong mỗi ngày chia **Thêm / Đổi / Sửa / Bỏ** theo tinh thần [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). `#số` là PR của repo này; `tvb#số` là PR ở repo cũ [phonglh-tvb/dot](https://github.com/phonglh-tvb/dot), nơi repo nằm tới 2026-11-20 (cùng nội dung lịch sử; khi chuyển, commit được viết lại với tác giả unrealphong nên SHA khác repo cũ); mã 7 ký tự là commit từ trước khi repo dùng PR. Thiết kế của các việc lớn ở [docs/specs/](docs/specs/README.md).
 
 Cách ghi một dòng mới: mục Commit và PR trong [AGENTS.md](AGENTS.md).
 
@@ -8,7 +8,7 @@ Cách ghi một dòng mới: mục Commit và PR trong [AGENTS.md](AGENTS.md).
 
 ### Đổi
 
-- Repo chuyển sang [unrealphong/dot](https://github.com/unrealphong/dot), cùng lịch sử commit; commit từ nay bằng tài khoản unrealphong (danh tính đặt trong `.git/config` của checkout, danh tính chung của máy không đổi). PR cũ ghi là `tvb#số` và vẫn trỏ về [phonglh-tvb/dot](https://github.com/phonglh-tvb/dot). [#1]
+- Repo chuyển sang [unrealphong/dot](https://github.com/unrealphong/dot). Toàn bộ lịch sử được viết lại với tác giả unrealphong (nội dung, thông điệp và ngày giữ nguyên, SHA đổi); commit từ nay cũng bằng tài khoản này (danh tính đặt trong `.git/config` của checkout, danh tính chung của máy không đổi). PR cũ ghi là `tvb#số` và vẫn trỏ về [phonglh-tvb/dot](https://github.com/phonglh-tvb/dot). [#1]
 
 ## 2026-11-16
 
@@ -89,19 +89,19 @@ Cách ghi một dòng mới: mục Commit và PR trong [AGENTS.md](AGENTS.md).
 - CI: shellcheck, shfmt, stylua, actionlint, gitleaks; dựng cấu hình trong HOME giả trên Ubuntu và macOS. [tvb#5]
 - `scripts/drift.sh` so máy với khai báo; bước `rust`; pnpm trong mise. [tvb#3]
 - Cấu hình zsh tối thiểu (`.zshenv`, `.zprofile`, `.zshrc`). [tvb#2]
-- `AGENTS.md` (CLAUDE.md trỏ tới) và mẫu mô tả PR. [68ad9d8]
-- Secret: hook gitleaks, `scripts/secrets.sh` (1Password, sops + age), `docs/secrets.md`. [0b65058]
-- `install.sh` chạy theo bước; `scripts/link.sh` symlink an toàn, đồ đang chiếm chỗ được chuyển vào `~/.dotfiles-backup/` thay vì xoá. [8577490]
+- `AGENTS.md` (CLAUDE.md trỏ tới) và mẫu mô tả PR. [efa2edd]
+- Secret: hook gitleaks, `scripts/secrets.sh` (1Password, sops + age), `docs/secrets.md`. [a2ab9dd]
+- `install.sh` chạy theo bước; `scripts/link.sh` symlink an toàn, đồ đang chiếm chỗ được chuyển vào `~/.dotfiles-backup/` thay vì xoá. [14d0ab7]
 
 ### Đổi
 
 - tmux: thanh trạng thái và viền pane theo Rose Pine, cùng bảng màu với Ghostty và Neovim. [tvb#17]
 - Agent được tự merge PR của mình khi đủ bốn điều kiện. [tvb#4]
 - Brewfile tách thành lõi, `devops`, `apps`; chọn nhóm bằng `DOT_PROFILES`. [tvb#3]
-- Cập nhật plugin Neovim. [tvb#10] [4d6e2ed]
-- Neovim thuần 0.12: `vim.pack` thay lazy.nvim, completion và snippet có sẵn thay nvim-cmp và LuaSnip; bỏ bản phân phối NvChad nhưng giữ giao diện và bộ phím. [cc6a6b8]
-- mise chọn Java theo major (`temurin-21`, `temurin-25`) để `mise upgrade` tự lên bản vá. [ed2912c]
-- Ansible role `dot` gọi `scripts/link.sh` thay vì xoá file đang chiếm chỗ. [8577490]
+- Cập nhật plugin Neovim. [tvb#10] [2c75f62]
+- Neovim thuần 0.12: `vim.pack` thay lazy.nvim, completion và snippet có sẵn thay nvim-cmp và LuaSnip; bỏ bản phân phối NvChad nhưng giữ giao diện và bộ phím. [c81c002]
+- mise chọn Java theo major (`temurin-21`, `temurin-25`) để `mise upgrade` tự lên bản vá. [0c6c308]
+- Ansible role `dot` gọi `scripts/link.sh` thay vì xoá file đang chiếm chỗ. [14d0ab7]
 
 ### Sửa
 
@@ -125,27 +125,27 @@ Cách ghi một dòng mới: mục Commit và PR trong [AGENTS.md](AGENTS.md).
 
 ### Thêm
 
-- Neovim cho web, Odoo, Rust, Go, Python, Java và viết tài liệu: LSP, formatter (conform), debug (nvim-dap). [2a72f8f]
-- `typst`, `mactex`, `skim` để viết Typst / LaTeX. [9231e6f]
-- git: difftool `nvimdiff`, danh tính riêng cho `~/workspace/personal/`, thêm mẫu ignore toàn cục. [5e8f978]
-- fish: alias `eza`, tích hợp shell của Kiro. [189c44e]
-- mise: dotnet. [a2b5cfa]
+- Neovim cho web, Odoo, Rust, Go, Python, Java và viết tài liệu: LSP, formatter (conform), debug (nvim-dap). [3d32c9d]
+- `typst`, `mactex`, `skim` để viết Typst / LaTeX. [f34c85a]
+- git: difftool `nvimdiff`, danh tính riêng cho `~/workspace/personal/`, thêm mẫu ignore toàn cục. [a6c7850]
+- fish: alias `eza`, tích hợp shell của Kiro. [99cc0c0]
+- mise: dotnet. [8375e75]
 
 ## 2026-08-19
 
 ### Đổi
 
-- Thêm và cập nhật plugin Neovim. [86b5493]
+- Thêm và cập nhật plugin Neovim. [290157e]
 
 ## 2026-08-18
 
 ### Thêm
 
-- Cấu hình đầu tiên: Neovim (lazy.nvim), tmux, WezTerm, Docker Compose (Postgres, MongoDB, MySQL, Kafka, pkg-scanner), Brewfile. [332c1a0]
+- Cấu hình đầu tiên: Neovim (lazy.nvim), tmux, WezTerm, Docker Compose (Postgres, MongoDB, MySQL, Kafka, pkg-scanner), Brewfile. [e147a85]
 
 ### Đổi
 
-- Tên người dùng git. [1434707]
+- Tên người dùng git. [c1b9557]
 
 [#1]: https://github.com/unrealphong/dot/pull/1
 [tvb#34]: https://github.com/phonglh-tvb/dot/pull/34
@@ -181,17 +181,17 @@ Cách ghi một dòng mới: mục Commit và PR trong [AGENTS.md](AGENTS.md).
 [tvb#4]: https://github.com/phonglh-tvb/dot/pull/4
 [tvb#3]: https://github.com/phonglh-tvb/dot/pull/3
 [tvb#2]: https://github.com/phonglh-tvb/dot/pull/2
-[68ad9d8]: https://github.com/unrealphong/dot/commit/68ad9d8
-[0b65058]: https://github.com/unrealphong/dot/commit/0b65058
-[8577490]: https://github.com/unrealphong/dot/commit/8577490
-[4d6e2ed]: https://github.com/unrealphong/dot/commit/4d6e2ed
-[cc6a6b8]: https://github.com/unrealphong/dot/commit/cc6a6b8
-[ed2912c]: https://github.com/unrealphong/dot/commit/ed2912c
-[2a72f8f]: https://github.com/unrealphong/dot/commit/2a72f8f
-[9231e6f]: https://github.com/unrealphong/dot/commit/9231e6f
-[5e8f978]: https://github.com/unrealphong/dot/commit/5e8f978
-[189c44e]: https://github.com/unrealphong/dot/commit/189c44e
-[a2b5cfa]: https://github.com/unrealphong/dot/commit/a2b5cfa
-[86b5493]: https://github.com/unrealphong/dot/commit/86b5493
-[332c1a0]: https://github.com/unrealphong/dot/commit/332c1a0
-[1434707]: https://github.com/unrealphong/dot/commit/1434707
+[efa2edd]: https://github.com/unrealphong/dot/commit/efa2edd
+[a2ab9dd]: https://github.com/unrealphong/dot/commit/a2ab9dd
+[14d0ab7]: https://github.com/unrealphong/dot/commit/14d0ab7
+[2c75f62]: https://github.com/unrealphong/dot/commit/2c75f62
+[c81c002]: https://github.com/unrealphong/dot/commit/c81c002
+[0c6c308]: https://github.com/unrealphong/dot/commit/0c6c308
+[3d32c9d]: https://github.com/unrealphong/dot/commit/3d32c9d
+[f34c85a]: https://github.com/unrealphong/dot/commit/f34c85a
+[a6c7850]: https://github.com/unrealphong/dot/commit/a6c7850
+[99cc0c0]: https://github.com/unrealphong/dot/commit/99cc0c0
+[8375e75]: https://github.com/unrealphong/dot/commit/8375e75
+[290157e]: https://github.com/unrealphong/dot/commit/290157e
+[e147a85]: https://github.com/unrealphong/dot/commit/e147a85
+[c1b9557]: https://github.com/unrealphong/dot/commit/c1b9557
