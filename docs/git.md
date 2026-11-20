@@ -26,7 +26,7 @@ Hai file **không** nằm trong repo vì chứa thông tin riêng:
 | `git df` | `diff` | |
 | `git cp` | `cherry-pick` | |
 | `git lg` | `log --graph` một dòng mỗi commit | chỉ nhánh hiện tại |
-| `git hist` | như `lg` nhưng `--all`, ngày tương đối | xem nhánh nào đang ở đâu so với `master` |
+| `git hist` | như `lg` nhưng `--all`, ngày tương đối | xem nhánh nào đang ở đâu so với nhánh chính |
 | `git open` | `gh browse` | mở repo trên GitHub; `git open -n` chỉ in URL, `git open <file>` mở đúng file |
 | `git unmerged` | liệt kê file đang xung đột | |
 | `git edit-unmerged` | mở các file đó bằng `$EDITOR` (mặc định `nvim`) | không có file nào thì chỉ in thông báo, không mở editor rỗng |
