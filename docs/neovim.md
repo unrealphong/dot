@@ -30,7 +30,7 @@ README.md                cách dùng: phím tắt và quy trình làm việc
 
 ## LSP
 
-- `lua/configs/lspconfig.lua` giữ phần dùng chung: danh sách server đưa cho `vim.lsp.enable`, cấu hình `"*"` (tắt semantic tokens), và `LspAttach` (completion gốc của Neovim, phím tắt, tắt `document_color` vì colorify của nvchad/ui đã lo).
+- `lua/configs/lspconfig.lua` giữ phần dùng chung: danh sách server đưa cho `vim.lsp.enable`, cấu hình `"*"` (tắt semantic tokens), và `LspAttach` (completion gốc của Neovim, phím tắt, tắt `document_color` vì colorify của nvchad/ui đã lo, cắt bớt pyright ở project Odoo).
 - Cấu hình riêng của từng server ở `after/lsp/<tên>.lua`, mỗi file `return` một bảng. Neovim nạp mọi `lsp/<tên>.lua` trên runtimepath và `after/` nạp sau cùng, nên bảng này merge **lên** dữ liệu `lsp/<tên>.lua` của nvim-lspconfig. Thêm server mới: thêm tên vào danh sách trong `lspconfig.lua`, cần sửa gì thì tạo thêm file trong `after/lsp/`.
 - Hai file là định nghĩa trọn vẹn vì nvim-lspconfig không có: `after/lsp/roslyn.lua` (nvim-lspconfig chỉ có `roslyn_ls`, không hỗ trợ Razor; server do roslyn.nvim tự bật, không qua `vim.lsp.enable`) và `after/lsp/odoo_ls.lua`.
 - Sửa `after/lsp/` xong, cách chắc nhất để biết không đổi hành vi: dump `vim.lsp.config[<tên>]` của mọi server ra file trước và sau rồi `diff` (xem bảng Kiểm chứng trong [AGENTS.md](../AGENTS.md)).
@@ -43,3 +43,14 @@ README.md                cách dùng: phím tắt và quy trình làm việc
 ## Odoo
 
 `odoo_ls` chỉ gắn vào `python` và `xml` khi project có `odools.toml`. Binary và typeshed do `./install.sh odoo` cài, bản và sha256 ghim trong `scripts/odoo-ls.sh`. Nâng bản: sửa `VERSION` và sha256 theo trang release, đọc ghi chú phát hành và `config_schema.json` của release đó trước (khoá của `odools.toml` có thể đổi). Bản cũ được giữ thành `odoo_ls_server.<bản cũ>` và `typeshed.<bản cũ>`; quay lại bằng `mv` ngược.
+
+OdooLS chỉ gợi ý phần Odoo: model và field (`self.env["res.pa`, `fields.Ch`), thành viên của record và module (`self.`, `os.`), tên module sau `import`. Nó **không** gợi ý builtin (`isinstance`), từ khoá (`return`) hay tên sau `from x import`. Vì vậy ở project Odoo pyright vẫn chạy, nhưng chỉ để bù phần đó (`after/lsp/pyright.lua`):
+
+- Dùng python và `odoo_path` mà `odools.toml` chỉ tới, nên `from odoo import ` cũng có gợi ý.
+- Không báo diagnostics (`analysis.ignore = ["**"]`): đọc mã Odoo bằng kiểu tĩnh thì báo sai rất nhiều, còn odoo_ls và ruff đã báo.
+- Chỉ giữ completion và signature help. Hover, go to definition, references, symbol để odoo_ls, nên `K` / `gd` không ra kết quả đôi.
+- Không gợi ý sau dấu chấm. pyright không biết field / model của Odoo nên chỉ trả về thành viên của `BaseModel`, trùng gần hết với odoo_ls (`params.` từng ra 523 mục, 226 mục bị đôi).
+
+Còn trùng nhẹ ở đầu từ: tên cục bộ hay tên đã import (`fields`, `api`) có thể hiện hai lần, một của mỗi server. Plugin chính thức [odoo/odoo-neovim](https://github.com/odoo/odoo-neovim) cảnh báo khi pyright chạy cùng (tính năng chồng nhau); cách cắt bớt ở trên là để tránh đúng chỗ chồng đó.
+
+Lần đầu mở project, OdooLS mất khoảng 10 giây để nạp module (máy này: 1249 module). Trong lúc đó chỉ có gợi ý của pyright.

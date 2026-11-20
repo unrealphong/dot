@@ -50,6 +50,39 @@ end
 
 local extended = {}
 
+-- pyright ở project Odoo chỉ để gợi ý (xem after/lsp/pyright.lua): giữ completion và signature help, phần còn
+-- lại (hover, go to definition, symbol...) để odoo_ls. Gợi ý sau dấu chấm cũng bỏ: pyright không biết field /
+-- model của Odoo nên chỉ trả về thành viên của BaseModel, trùng gần hết với odoo_ls (`params.` ra 523 mục,
+-- 226 mục bị đôi). vim.lsp.completion gộp kết quả mọi server mà không có chỗ lọc, nên chặn ở request.
+local trimmed = {}
+local function odoo_companion(client)
+  if trimmed[client.id] then
+    return
+  end
+  trimmed[client.id] = true
+  for key in pairs(client.server_capabilities) do
+    if key:match "Provider$" and key ~= "completionProvider" and key ~= "signatureHelpProvider" then
+      client.server_capabilities[key] = nil
+    end
+  end
+  local request = client.request
+  client.request = function(self, method, params, handler, bufnr)
+    if method == "textDocument/completion" and handler and params and params.position then
+      local buf = vim.uri_to_bufnr(params.textDocument.uri)
+      local row = params.position.line
+      local line = vim.api.nvim_buf_get_lines(buf, row, row + 1, false)[1] or ""
+      local col = vim.str_byteindex(line, self.offset_encoding, params.position.character, false)
+      if line:sub(1, col):match "%.[%w_]*$" then
+        local done = handler
+        handler = function(err, _, ctx, config)
+          return done(err, nil, ctx, config)
+        end
+      end
+    end
+    return request(self, method, params, handler, bufnr)
+  end
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local buf = args.buf
@@ -71,6 +104,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- ruff chỉ lint / format; hover để pyright / odoo_ls
     if client.name == "ruff" then
       client.server_capabilities.hoverProvider = false
+    end
+
+    if client.name == "pyright" and client.root_dir and vim.uv.fs_stat(client.root_dir .. "/odools.toml") then
+      odoo_companion(client)
     end
 
     -- Màu do colorify của nvchad/ui lo (hex, tailwind); tắt bản gốc để không hiện đôi
