@@ -14,6 +14,7 @@ config/tmux/plugins/
 # Local secrets / machine state
 docker/.env
 config/fish/fish_variables
+config/mise/config.local.toml
 .claude/settings.local.json
 config/.zcompdump*
 

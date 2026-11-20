@@ -1,4 +1,5 @@
 [tools]
+# Máy không code C#, Go hay Rust thì tắt trong config.local.toml của máy đó (docs/shell.md), đừng bỏ ở đây
 dotnet = "latest"
 # C# trong Neovim: roslyn.nvim cần roslyn-language-server >= 5.12.0-1.26453.19 (Mason còn bản cũ hơn),
 # netcoredbg cần bản có osx-arm64 (Mason chỉ có bản x86_64); dotnet-aspnet-codegenerator là engine của :Scaffold
