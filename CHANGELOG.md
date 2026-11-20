@@ -4,6 +4,12 @@ Những thay đổi đáng kể của repo, mới nhất ở trên. Repo không 
 
 Cách ghi một dòng mới: mục Commit và PR trong [AGENTS.md](AGENTS.md).
 
+## 2026-11-20
+
+### Đổi
+
+- Repo chuyển sang [unrealphong/dot](https://github.com/unrealphong/dot), cùng lịch sử commit; commit từ nay bằng tài khoản unrealphong (danh tính đặt trong `.git/config` của checkout, danh tính chung của máy không đổi). PR cũ ghi là `tvb#số` và vẫn trỏ về [phonglh-tvb/dot](https://github.com/phonglh-tvb/dot). [#1]
+
 ## 2026-11-16
 
 ### Thêm
@@ -141,6 +147,7 @@ Cách ghi một dòng mới: mục Commit và PR trong [AGENTS.md](AGENTS.md).
 
 - Tên người dùng git. [1434707]
 
+[#1]: https://github.com/unrealphong/dot/pull/1
 [tvb#34]: https://github.com/phonglh-tvb/dot/pull/34
 [tvb#33]: https://github.com/phonglh-tvb/dot/pull/33
 [tvb#32]: https://github.com/phonglh-tvb/dot/pull/32
