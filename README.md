@@ -102,7 +102,7 @@ Repo public, nên không chứa giá trị secret, chỉ có công cụ và tham
 
 ## CI
 
-Mỗi PR và mỗi lần đẩy lên `master` chạy [.github/workflows/ci.yml](.github/workflows/ci.yml): `shellcheck`, `shfmt`, `stylua --check`, `actionlint`, gitleaks (file và lịch sử); `hadolint` cho Dockerfile; rồi trên cả Ubuntu và macOS dựng cấu hình trong HOME giả (`link.sh` chạy hai lần phải không đổi gì), kiểm cú pháp zsh / fish, kiểm tmux chọn đúng lệnh clipboard; thêm job `install-linux` cài thật apt + Linuxbrew + font trên Ubuntu rồi đối chiếu bằng `drift.sh`. Chạy cùng các lệnh đó trên máy trước khi đẩy; công cụ có sẵn trong Brewfile.
+Mỗi PR và mỗi lần đẩy lên `main` chạy [.github/workflows/ci.yml](.github/workflows/ci.yml): `shellcheck`, `shfmt`, `stylua --check`, `actionlint`, gitleaks (file và lịch sử); `hadolint` cho Dockerfile; rồi trên cả Ubuntu và macOS dựng cấu hình trong HOME giả (`link.sh` chạy hai lần phải không đổi gì), kiểm cú pháp zsh / fish, kiểm tmux chọn đúng lệnh clipboard; thêm job `install-linux` cài thật apt + Linuxbrew + font trên Ubuntu rồi đối chiếu bằng `drift.sh`. Chạy cùng các lệnh đó trên máy trước khi đẩy; công cụ có sẵn trong Brewfile.
 
 ## Ansible (tuỳ chọn)
 
