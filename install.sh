@@ -14,7 +14,7 @@
 #   hooks  bật hook gitleaks (.githooks) cho repo dotfiles này: chặn commit / push chứa secret
 #   fonts  (chỉ Linux) Nerd Font vào ~/.local/share/fonts (scripts/fonts.sh); macOS cài font bằng cask
 #   mise   runtime (go, java, node, python...) theo config/mise/config.toml
-#   rust   rustup + toolchain stable, chỉ khi chưa có ~/.cargo/bin/rustup
+#   rust   rustup + toolchain stable, chỉ khi chưa có ~/.cargo/bin/rustup và mise không tắt rust
 #   nvim   plugin Neovim (vim.pack), công cụ Mason (LSP, formatter, debugger), parser treesitter
 #   odoo   OdooLS (language server của Odoo) cho Neovim: binary + typeshed (scripts/odoo-ls.sh); bản cũ được giữ lại
 
@@ -48,6 +48,15 @@ die() {
 
 as_root() {
   if [ "$(id -u)" -eq 0 ]; then "$@"; else sudo "$@"; fi
+}
+
+# Máy này tắt $1 bằng disable_tools của mise (~/.config/mise/config.local.toml, docs/shell.md)
+mise_disabled() {
+  have mise || return 1
+  case "$(mise settings get disable_tools 2>/dev/null || true)" in
+    *"\"$1\""*) return 0 ;;
+  esac
+  return 1
 }
 
 # Đưa brew vào PATH của phiên này; brew nằm ở đâu tuỳ máy (Apple Silicon, Intel, Linuxbrew)
@@ -140,6 +149,11 @@ step_mise() {
 }
 
 step_rust() {
+  # rustup không do mise cài, nhưng tắt theo máy bằng chung danh sách disable_tools cho khỏi thêm một chỗ khai báo
+  if mise_disabled rust; then
+    echo "bỏ qua: máy này tắt rust (disable_tools của mise)"
+    return
+  fi
   if [ -x "$HOME/.cargo/bin/rustup" ]; then
     echo "rustup đã có"
     return
