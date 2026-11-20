@@ -6,6 +6,10 @@ Cách ghi một dòng mới: mục Commit và PR trong [AGENTS.md](AGENTS.md).
 
 ## 2026-11-20
 
+### Thêm
+
+- Mỗi máy tự tắt được C#, Go, Rust mà không bỏ khỏi repo: liệt kê chúng trong `disable_tools` của `~/.config/mise/config.local.toml` (file riêng của máy, không vào repo). Khi đó `./install.sh` không cài .NET SDK, Go, rustup, `lld`/`lldb`, Rider; nvim không cài gói Mason của Go và Rust; `scripts/drift.sh` không báo thiếu chúng. Cách tắt và thứ tự gỡ ở [docs/shell.md](docs/shell.md). [#5]
+
 ### Đổi
 
 - Repo chuyển sang [unrealphong/dot](https://github.com/unrealphong/dot). Toàn bộ lịch sử được viết lại với tác giả unrealphong (nội dung, thông điệp và ngày giữ nguyên, SHA đổi); commit từ nay cũng bằng tài khoản này (danh tính đặt trong `.git/config` của checkout, danh tính chung của máy không đổi). Nhánh chính là `main`: lịch sử chuyển sang nằm ở nhánh `master` và đã merge vào `main` [#3]; PR merge bằng fast-forward từ máy nên commit nào cũng do unrealphong commit và ký. PR cũ ghi là `tvb#số` và vẫn trỏ về [phonglh-tvb/dot](https://github.com/phonglh-tvb/dot). [#4]
@@ -151,6 +155,7 @@ Cách ghi một dòng mới: mục Commit và PR trong [AGENTS.md](AGENTS.md).
 
 - Tên người dùng git. [c1b9557]
 
+[#5]: https://github.com/unrealphong/dot/pull/5
 [#4]: https://github.com/unrealphong/dot/pull/4
 [#3]: https://github.com/unrealphong/dot/pull/3
 [#2]: https://github.com/unrealphong/dot/pull/2
