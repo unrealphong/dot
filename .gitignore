@@ -14,3 +14,8 @@ config/tmux/plugins/
 # Local secrets / machine state
 docker/.env
 config/fish/fish_variables
+.claude/settings.local.json
+config/.zcompdump*
+
+# Karabiner tự sao lưu mỗi lần đổi cấu hình (thư mục config/karabiner được link nguyên thư mục)
+config/karabiner/automatic_backups/

@@ -5,9 +5,9 @@
     required = true
 
 [user]
-    name = unrealphong
-    email = hongphongle115@gmail.com
-    signingKey = ~/.ssh/id_unrealphong
+    name = phonglh-tvb
+    email = phong.lh@tanvietbooks.com.vn
+    signingKey = ~/.ssh/id_ed25519
 
 [color]
     ui = true
@@ -29,12 +29,18 @@
 
 [merge]
     conflictstyle = diff3
+    tool = nvimdiff
+
+[mergetool]
+    prompt = false
+    keepBackup = false
 
 [diff]
     colorMoved = default
     algorithm = minimal
     compactionHeuristic = true
     renames = true
+	tool = nvimdiff
 
 [pull]
     ff = only
@@ -65,18 +71,19 @@
     autoStash = true
 
 [credential "https://github.com"]
-    helper = 
-    helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = 
+	helper = !gh auth git-credential
 
 [credential "https://gist.github.com"]
-    helper = 
-    helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = 
+	helper = !gh auth git-credential
+
+[includeIf "gitdir:~/workspace/personal/"]
+    path = ~/.gitconfig-personal
 
 [include]
 path = ~/.gitalias
-
-[includeIf "gitdir:~/workspace/work/tvb/"]
-    path = ~/workspace/work/tvb/.gitconfig
-
-[includeIf "gitdir:~/workspace/sketch/"]
-    path = ~/workspace/sketch/.gitconfig
+[difftool]
+	prompt = false
+[difftool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"

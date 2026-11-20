@@ -10,12 +10,25 @@ alias c "clear"
 alias vi "nvim"
 alias prv "fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 
-alias cs "open $argv -a 'Cursor'"
-alias vs "open $argv -a 'Visual Studio Code'"
+switch (uname)
+    case Darwin
+        alias cs "open -a 'Cursor'"
+        alias vs "open -a 'Visual Studio Code'"
+    case '*'
+        alias cs cursor
+        alias vs code
+end
 
-# starship init fish | source
+alias ls='eza'
+alias ll='eza -lah'
+alias la='eza -a'
+
 atuin init fish | source
 zoxide init fish --cmd cd | source
 
-# Added by Antigravity IDE
-fish_add_path /Users/phnglh/.antigravity-ide/antigravity-ide/bin
+# Antigravity IDE (chỉ khi đã cài)
+test -d ~/.antigravity-ide/antigravity-ide/bin; and fish_add_path ~/.antigravity-ide/antigravity-ide/bin
+
+# Kiro shell integration (chỉ trong terminal của Kiro). Dòng cũ thiếu `;` trước `and`, nên fish coi cả dòng là một lệnh
+# `string match` và chạy `kiro --locate-shell-integration-path` ở mọi lần mở shell (máy không có kiro thì báo lỗi mỗi lần).
+test "$TERM_PROGRAM" = kiro; and type -q kiro; and . (kiro --locate-shell-integration-path fish)
