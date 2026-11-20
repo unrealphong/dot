@@ -42,10 +42,29 @@ report() {
   echo
 }
 
+# Tool máy này tắt bằng disable_tools của mise (docs/shell.md), dạng ["go", "rust"]
+disabled="$(if have mise; then mise settings get disable_tools 2>/dev/null; fi || true)"
+
+# bỏ dòng `unless off.("<tool>")` của Brewfile khi <tool> đã tắt
+drop_disabled() {
+  local line tool
+  while IFS= read -r line; do
+    case "$line" in
+      *'unless off.("'*)
+        tool="${line##*unless off.(\"}"
+        tool="${tool%%\"*}"
+        case "$disabled" in *"\"$tool\""*) continue ;; esac
+        ;;
+    esac
+    printf '%s\n' "$line"
+  done
+}
+
 # tên ngắn (bỏ tiền tố tap) của mọi mục kiểu $1 (brew|cask) trong Brewfile*; ngoài macOS bỏ dòng `if OS.mac?`
 declared() {
   find "$REPO" -maxdepth 1 -name 'Brewfile*' -exec cat {} + |
     { if [ "$OS" = Darwin ]; then cat; else grep -v 'if OS\.mac?' || true; fi; } |
+    drop_disabled |
     sed -nE "s/^$1 \"([^\"]+)\".*/\1/p" | sed 's#.*/##' | sort -u
 }
 

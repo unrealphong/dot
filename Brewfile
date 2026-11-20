@@ -1,6 +1,11 @@
 # Phần lõi: công cụ dòng lệnh dùng hằng ngày. Cài kèm Brewfile.devops và Brewfile.apps (xem install.sh).
 # Trong mỗi nhóm giữ thứ tự theo tên ngắn. Kiểm máy có lệch khai báo không: scripts/drift.sh
 # Brewfile là Ruby: gói chỉ có trên macOS thì thêm `if OS.mac?` ở cuối dòng (Linuxbrew sẽ bỏ qua).
+# Gói chỉ một ngôn ngữ cần thì thêm `unless off.("<tool>")`: máy tắt tool đó bằng disable_tools của mise
+# (docs/shell.md) sẽ bỏ qua, scripts/drift.sh cũng hiểu. brew chạy Brewfile với PATH rút gọn nên gọi mise bằng
+# đường dẫn đầy đủ; máy chưa có mise thì không tắt gì.
+disabled = `#{HOMEBREW_PREFIX}/bin/mise settings get disable_tools 2>/dev/null`
+off = ->(tool) { disabled.include?(%("#{tool}")) }
 
 # Homebrew 7 từ chối tải formula của tap bên thứ ba chưa được tin (máy mới chưa chạy `brew trust`).
 # Chỉ tin đúng từng formula bên dưới (`trusted: true`), không tin cả tap.
@@ -80,9 +85,9 @@ brew "xh"
 brew "osv-scanner"
 brew "trivy"
 
-# thư viện build: python-ldap của Odoo cần openldap + cyrus-sasl; Rust cần lld + lldb
+# thư viện build: python-ldap của Odoo cần openldap + cyrus-sasl; Rust cần lld + lldb (kéo theo llvm)
 brew "cyrus-sasl"
-brew "lld"
-brew "lldb"
+brew "lld" unless off.("rust")
+brew "lldb" unless off.("rust")
 brew "openldap"
 brew "pkgconf"

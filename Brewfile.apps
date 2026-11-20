@@ -1,5 +1,8 @@
 # Ứng dụng đồ hoạ và font, toàn cask nên chỉ macOS (install.sh bỏ qua nhóm này trên Linux; font Linux: scripts/fonts.sh).
 # Bỏ qua trên server: DOT_PROFILES="devops" ./install.sh brew
+# `unless off.("<tool>")`: bỏ qua khi máy tắt tool đó, xem đầu Brewfile
+disabled = `#{HOMEBREW_PREFIX}/bin/mise settings get disable_tools 2>/dev/null`
+off = ->(tool) { disabled.include?(%("#{tool}")) }
 
 # bảo mật, tiện ích hệ thống
 cask "1password"
@@ -14,7 +17,7 @@ cask "cursor"
 cask "intellij-idea"
 cask "iterm2"
 cask "kiro"
-cask "rider"
+cask "rider" unless off.("dotnet") # IDE của C#
 cask "visual-studio-code"
 cask "visual-studio-code@insiders"
 cask "zed"
