@@ -5,7 +5,7 @@ Cấu hình máy macOS (Apple Silicon) hoặc Linux (Debian, Ubuntu, Pop!_OS): s
 ## Cài mới
 
 ```sh
-git clone git@github.com:phonglh-tvb/dot.git ~/workspace/work/dot   # đặt ở đâu cũng được
+git clone git@github.com:unrealphong/dot.git ~/workspace/work/dot   # đặt ở đâu cũng được
 cd ~/workspace/work/dot
 ./install.sh
 ```
