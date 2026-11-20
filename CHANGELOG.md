@@ -4,11 +4,13 @@ Những thay đổi đáng kể của repo, mới nhất ở trên. Repo không 
 
 Cách ghi một dòng mới: mục Commit và PR trong [AGENTS.md](AGENTS.md).
 
-## 2026-11-20
+## 2026-11-21
 
 ### Thêm
 
 - Mỗi máy tự tắt được C#, Go, Rust mà không bỏ khỏi repo: liệt kê chúng trong `disable_tools` của `~/.config/mise/config.local.toml` (file riêng của máy, không vào repo). Khi đó `./install.sh` không cài .NET SDK, Go, rustup, `lld`/`lldb`, Rider; nvim không cài gói Mason của Go và Rust; `scripts/drift.sh` không báo thiếu chúng. Cách tắt và thứ tự gỡ ở [docs/shell.md](docs/shell.md). [#5]
+
+## 2026-11-20
 
 ### Đổi
 
