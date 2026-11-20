@@ -4,6 +4,12 @@ Những thay đổi đáng kể của repo, mới nhất ở trên. Repo không 
 
 Cách ghi một dòng mới: mục Commit và PR trong [AGENTS.md](AGENTS.md).
 
+## 2026-11-20
+
+### Sửa
+
+- Project Odoo lại có gợi ý Python chung khi gõ: builtin (`isinstance`), từ khoá (`return`), tên sau `from odoo import`. odoo_ls không gợi ý những thứ đó, nên pyright chạy thêm nhưng chỉ để gợi ý (không diagnostics, không hover hay go to definition, không gợi ý sau dấu chấm để khỏi trùng với odoo_ls). Chi tiết ở [docs/neovim.md](docs/neovim.md). [#2]
+
 ## 2026-11-16
 
 ### Thêm
@@ -141,6 +147,7 @@ Cách ghi một dòng mới: mục Commit và PR trong [AGENTS.md](AGENTS.md).
 
 - Tên người dùng git. [1434707]
 
+[#2]: https://github.com/unrealphong/dot/pull/2
 [#34]: https://github.com/phonglh-tvb/dot/pull/34
 [#33]: https://github.com/phonglh-tvb/dot/pull/33
 [#32]: https://github.com/phonglh-tvb/dot/pull/32
