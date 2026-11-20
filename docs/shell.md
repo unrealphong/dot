@@ -36,6 +36,48 @@ mise ls node          # các bản đã cài
 > Project nào ghi một bản node **chưa cài** thì lần đầu `cd` vào đó mise sẽ tự tải bản ấy rồi mới chạy
 > (node 22 mất khoảng 7 giây, gần 190 MB). Không muốn vậy thì bỏ khoá đó khỏi `config/mise/config.toml`.
 
+### Tắt một ngôn ngữ trên một máy
+
+Máy không code C#, Go hay Rust thì không bỏ chúng khỏi repo (máy khác vẫn cần), mà ghi vào `disable_tools` trong
+`~/.config/mise/config.local.toml`. Theo tài liệu mise, `config.local.toml` là chỗ cho giá trị riêng của máy và đè
+lên `config.toml` cùng thư mục. `~/.config/mise` là link vào repo nên file nằm ở `config/mise/config.local.toml` của
+checkout; `.gitignore` đã chặn nó.
+
+```toml
+[settings]
+disable_tools = [
+  # C#: SDK và ba công cụ cho nvim; công cụ dotnet:* cần SDK để cài nên tắt cả bốn
+  "dotnet", "dotnet:dotnet-aspnet-codegenerator", "dotnet:roslyn-language-server", "github:Samsung/netcoredbg",
+  "go",
+  "rust",
+]
+```
+
+Tên phải đúng như trong `config/mise/config.toml`: `dotnet` không kéo theo `dotnet:...`. Danh sách này được đọc ở:
+
+- **mise**: `mise install` (bước `mise` của `install.sh`) bỏ qua, shell không đưa vào PATH, gõ `go` cũng không tự tải.
+- **Bước `rust`**: rustup cài ngoài mise nhưng dùng chung danh sách, có `"rust"` thì không cài.
+- **Brewfile**: gói đánh dấu `unless off.("<tool>")` bị bỏ qua khi tool đó tắt: `lld`, `lldb` theo `rust` (kéo theo
+  `llvm`), Rider theo `dotnet`. `scripts/drift.sh` hiểu cùng dấu đó nên không báo thiếu.
+- **Neovim**: gói Mason của Go (gopls, golangci-lint, gofumpt, goimports, delve) chỉ cài khi có lệnh `go`, của Rust
+  (rust-analyzer, codelldb) khi có `cargo`. Plugin của C# và Rust vẫn nạp, chỉ chạy khi mở file của ngôn ngữ đó.
+
+Gỡ những thứ đã cài theo thứ tự: dọn cache khi `dotnet` và `go` còn chạy được (tắt rồi thì mise không tìm ra chúng
+nữa), ghi file trên, rồi mới gỡ:
+
+```sh
+dotnet nuget locals all --clear
+go clean -cache -modcache
+# ghi ~/.config/mise/config.local.toml như trên
+mise uninstall --all dotnet dotnet:dotnet-aspnet-codegenerator dotnet:roslyn-language-server github:Samsung/netcoredbg go
+rustup self uninstall -y
+brew uninstall lld lldb && brew autoremove    # llvm không còn gói nào cần nên đi theo
+brew uninstall --cask rider
+```
+
+Trong nvim: `:MasonUninstall gopls golangci-lint-langserver golangci-lint gofumpt goimports delve rust-analyzer codelldb`.
+Bật lại: bỏ tên khỏi danh sách rồi `./install.sh brew mise rust nvim`.
+
 ## tmux
 
 Prefix là `C-f`; `C-f C-f` gửi `C-f` thật xuống ứng dụng. Cấu hình ở

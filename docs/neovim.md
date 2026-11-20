@@ -24,7 +24,7 @@ README.md                cách dùng: phím tắt và quy trình làm việc
 
 - Plugin ghim bằng `nvim-pack-lock.json`: máy mới mở nvim (hoặc `./install.sh nvim`) là cài đúng commit.
 - Cập nhật plugin: `:lua vim.pack.update()`, xem thay đổi, `:write` để chấp nhận, rồi commit lockfile. Hoàn lại: `git checkout HEAD -- nvim-pack-lock.json` rồi `:restart`.
-- Công cụ (LSP, formatter, debug adapter) khai báo một chỗ trong `lua/configs/tools.lua`; `mason-tool-installer` tự cài những gói còn thiếu. Cài lại bằng tay: `:MasonToolsInstall`.
+- Công cụ (LSP, formatter, debug adapter) khai báo một chỗ trong `lua/configs/tools.lua`; `mason-tool-installer` tự cài những gói còn thiếu. Cài lại bằng tay: `:MasonToolsInstall`. Gói của Go chỉ cài khi có lệnh `go`, của Rust khi có `cargo`, để máy đã tắt hai ngôn ngữ đó ([shell.md](shell.md), mục Tắt một ngôn ngữ trên một máy) không cài thừa.
 - Cài plugin bị ngắt giữa chừng: khởi động sau sẽ tự xoá thư mục hỏng và cài lại.
 - Ba plugin cho việc đọc code, cấu hình ở `lua/configs/reading.lua`: `todo-comments.nvim` (nhãn trong comment, tìm bằng `:TodoTelescope`), `nvim-highlight-colors` (ô màu cạnh giá trị màu, kể cả class Tailwind), `gitlinker.nvim` (link GitHub của dòng đang đứng, cần Neovim 0.12). Phím ở [config/nvim/README.md](../config/nvim/README.md).
 

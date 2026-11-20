@@ -24,3 +24,4 @@ Trạng thái: `nháp` (đang bàn), `đã làm` (đã merge), `thay bởi NNNN`
 | Số | Spec | Trạng thái |
 |---|---|---|
 | 0001 | [SQL Server trên Docker context `dev` (Lima)](0001-lima-mssql.md) | đã làm |
+| 0002 | [Tắt ngôn ngữ theo từng máy](0002-machine-langs.md) | đã làm |

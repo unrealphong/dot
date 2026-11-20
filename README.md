@@ -20,8 +20,8 @@ cd ~/workspace/work/dot
 | `link` | symlink `config/` vào máy ([scripts/link.sh](scripts/link.sh)) |
 | `hooks` | bật hook gitleaks cho repo này ([docs/secrets.md](docs/secrets.md)) |
 | `fonts` | (chỉ Linux) JetBrainsMono và MartianMono Nerd Font vào `~/.local/share/fonts`, bản ghim kèm checksum ([scripts/fonts.sh](scripts/fonts.sh)); macOS dùng cask |
-| `mise` | runtime (go, java, node, python, ruby, dotnet) và công cụ C# cho nvim (roslyn-language-server, netcoredbg, dotnet-aspnet-codegenerator) theo `config/mise/config.toml` |
-| `rust` | rustup + toolchain stable, chỉ khi chưa có `~/.cargo/bin/rustup` |
+| `mise` | runtime (go, java, node, python, ruby, dotnet) và công cụ C# cho nvim (roslyn-language-server, netcoredbg, dotnet-aspnet-codegenerator) theo `config/mise/config.toml`. Máy không cần C#, Go, Rust thì tắt riêng máy đó ([docs/shell.md](docs/shell.md)) |
+| `rust` | rustup + toolchain stable, chỉ khi chưa có `~/.cargo/bin/rustup` và máy không tắt rust |
 | `nvim` | plugin Neovim (đúng commit trong `nvim-pack-lock.json`), công cụ Mason, parser treesitter. Lần đầu tải vài GB nên khá lâu |
 | `odoo` | OdooLS (language server của Odoo) và typeshed vào `~/.local/share/nvim/odoo/`, bản ghim kèm checksum ([scripts/odoo-ls.sh](scripts/odoo-ls.sh)); bản đang có được giữ lại bên cạnh |
 
@@ -110,4 +110,4 @@ Mỗi PR và mỗi lần đẩy lên `main` chạy [.github/workflows/ci.yml](.g
 
 ## Không nằm trong repo
 
-Cấu hình riêng của từng máy, không commit: `~/.gitconfig-personal` (danh tính cho `~/workspace/personal/`), `config/fish/fish_variables`, `.claude/settings.local.json`, `docker/.env`, và mọi thứ chứa đăng nhập như `~/.config/gh/hosts.yml`.
+Cấu hình riêng của từng máy, không commit: `~/.gitconfig-personal` (danh tính cho `~/workspace/personal/`), `config/fish/fish_variables`, `config/mise/config.local.toml` (ngôn ngữ tắt trên máy đó), `.claude/settings.local.json`, `docker/.env`, và mọi thứ chứa đăng nhập như `~/.config/gh/hosts.yml`.
